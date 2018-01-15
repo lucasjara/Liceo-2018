@@ -9,7 +9,8 @@
 class alumnos_model extends CI_Model
 {
         function obtener_datos(){
-            $this->db->select('*')->from('tb_alumnos');
+            $this->db->select("ID,CONCAT(RUT,DV) RUT, NOMBRES, CONCAT(APELLIDO_PAT,' ',APELLIDO_MAT) APELLIDOS, FECHA_NACIMIENTO, DOMICILIO, NUMERO")
+                ->from('tb_alumnos');
             $query = $this->db->get();
             return $query->result();
         }

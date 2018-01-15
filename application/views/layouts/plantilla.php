@@ -1,0 +1,34 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Lucas
+ * Date: 14-01-2018
+ * Time: 20:40
+ */
+?>
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Liceo</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="<?php echo base_url('/public/bootstrap/css/bootstrap.min.css')?>">
+    <link rel="stylesheet" href="<?php echo base_url('/public/bootstrap/css/bootstrap.min.css')?>">
+    <!-- Carga Inicial por carga de plantilla-->
+    <script src="<?php echo base_url('/public/js/jquery.js')?>"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+            <?php echo $content_for_layout; ?>
+        </div>
+    </div>
+</body>
+
+<script src="<?php echo base_url('/public/bootstrap/js/bootstrap.min.js')?>"></script>
+<script src="<?php echo base_url('/public/js/datatables.js')?>"></script>
+<script src="<?php echo base_url('/public/js/integracion_datatables.js')?>"></script>
+</html>
+

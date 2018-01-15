@@ -1,0 +1,31 @@
+header {
+	background:#2c3e50;
+	color:#fff;
+	background-color: #0B0B0B;
+}
+body
+{
+	background-image: url(../img/gyarados.jpg);
+}
+footer {
+	background:#16a085;
+	color:#fff;
+}
+nav
+{
+	color:#000;
+}
+.color
+{
+	background-color: #112;
+}
+#contenedor
+{
+ background-color: #000000;
+}
+#imagenes_slider
+{
+	height: 200px;
+	width: auto;
+	margin:auto auto;
+}

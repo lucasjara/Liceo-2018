@@ -1,0 +1,38 @@
+header {
+	background:#2c3e50;
+	color:#fff;
+}
+.main
+{
+	background:blue;
+	color: yellow;
+	border: 5px green;
+}
+
+.color1 {
+	background: #34495e;
+	color:#fff;
+}
+.color2
+{
+	background: black;
+}
+.color3
+{
+	background: orange;
+	color: black;
+}
+aside {
+	background:green;
+	color:#fff;
+}
+
+footer {
+	background:#16a085;
+	color:#fff;
+}
+.boton
+{
+	color: Red;
+	color:#000
+}
