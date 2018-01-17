@@ -19,13 +19,26 @@
     <!-- Carga Inicial por carga de plantilla-->
     <script src="<?php echo base_url('/public/js/jquery.js')?>"></script>
 </head>
-<body>
-    <div class="container">
+<body style="background-image: url(<?php echo base_url('/public/img/liceo.jpg')?>)">
+    <div class="container" >
         <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
             <?php echo $content_for_layout; ?>
         </div>
     </div>
 </body>
+<style>
+    hr {
+        -moz-border-bottom-colors: none;
+        -moz-border-image: none;
+        -moz-border-left-colors: none;
+        -moz-border-right-colors: none;
+        -moz-border-top-colors: none;
+        border-color: #EEEEEE -moz-use-text-color #FFFFFF;
+        border-style: solid none;
+        border-width: 1px 0;
+        margin: 18px 0;
+    }
+</style>
 <div class="modal fade" id="modal_generico" tabindex="-1"
 role="dialog" aria-hidden="true">
 <div class="modal-dialog">
