@@ -26,7 +26,23 @@
         </div>
     </div>
 </body>
-
+<div class="modal fade" id="modal_generico" tabindex="-1"
+role="dialog" aria-hidden="true">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">�</button>
+            <h3 id="titulo_modal_generico"></h3>
+        </div>
+        <div class="modal-body">
+            <h4 id="modal_generico_body"></h4>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
+    </div>
+</div>
+</div>
 <script src="<?php echo base_url('/public/bootstrap/js/bootstrap.min.js')?>"></script>
 <script src="<?php echo base_url('/public/js/datatables.js')?>"></script>
 <script src="<?php echo base_url('/public/js/integracion_datatables.js')?>"></script>

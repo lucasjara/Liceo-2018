@@ -12,18 +12,72 @@ class Alumnos extends CI_Controller
     {
         parent::__construct();
         $this->layout->setLayout("plantilla");
+        $this->load->library('form_validation');
     }
 
     function index(){
         $this->load->model('mantenedores/alumnos_model','alumnos_model');
-        $data['usuarios'] =  $this->alumnos_model->obtener_datos();
         $this->layout->view('vista');
         //$this->load->view('alumnos/vista',$data);
     }
     function obtener_datos(){
         $this->load->helper('array_utf8');
         $this->load->model('mantenedores/alumnos_model','alumnos_model');
-        $datos["data"] =  $this->alumnos_model->obtener_datos();
+        $data=  $this->alumnos_model->obtener_datos();
+        for ($i=0;$i<count($data);$i++){
+            $data[$i]->ACCIONES ='<button type="submit" data-id="' . $data[$i]->ID . '" data-rut="' . $data[$i]->RUT . '" data-nombres="' . $data[$i]->NOMBRES . '" data-apellidos="' . $data[$i]->APELLIDOS . '" data-fecha-nacimiento="' . $data[$i]->FECHA_NACIMIENTO . '" data-domicilio="' . $data[$i]->DOMICILIO . '" data-numero="' . $data[$i]->NUMERO . '" class="btn btn-primary btn-xs btn_editar" title="Editar"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+                                  <button type="submit" data-id="' . $data[$i]->ID . '" class="btn btn-danger btn-xs btn_eliminar" title="Eliminar"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>';
+        }
+        $datos["data"] =$data;
         $this->output->set_content_type('application/json')->set_output(json_encode(array_utf8_encode($datos)));
+    }
+    function editar_alumno(){
+        $mensaje = new stdClass();
+        $this->load->helper('array_utf8');
+        if ($this->input->post()) {
+            $this->form_validation->set_rules("id", "id", "required|is_numeric");
+            $this->form_validation->set_rules("nombres", "id", "required|min_length[3]");
+            $this->form_validation->set_rules("fecha_nacimiento", "id", "required|exact_length[10]");
+            $this->form_validation->set_rules("domicilio", "id", "required|min_length[10]");
+            $this->form_validation->set_rules("numero", "id", "required|min_length[8]");
+            if ($this->form_validation->run() != false) {
+                $id = $this->input->post('id');
+                $nombres = $this->input->post('nombres');
+                $fecha_nacimiento = $this->input->post('fecha_nacimiento');
+                $domicilio = $this->input->post('domicilio');
+                $numero = $this->input->post('numero');
+                $this->load->model('mantenedores/alumnos_model','alumnos_model');
+                $this->alumnos_model->editar_alumno($id,$nombres,$fecha_nacimiento,$domicilio,$numero);
+                $mensaje->respuesta = "S";
+                $mensaje->data = "Usuario Modificado Correctamente";
+            }else{
+                $mensaje->respuesta = "N";
+                $mensaje->data = validation_errors();
+            }
+        }else{
+            $mensaje->respuesta = "N";
+            $mensaje->data = 'No se pudo procesar la solicitud. Intente recargar la pagina.';
+        }
+        $this->output->set_content_type('application/json')->set_output(json_encode(array_utf8_encode($mensaje)));
+    }
+    function eliminar_alumno(){
+        $mensaje = new stdClass();
+        $this->load->helper('array_utf8');
+        if ($this->input->post()) {
+            $this->form_validation->set_rules("id", "id", "required|is_numeric");
+            if ($this->form_validation->run() != false) {
+                $id = $this->input->post('id');
+                $this->load->model('mantenedores/alumnos_model','alumnos_model');
+                $this->alumnos_model->eliminar_alumno($id);
+                $mensaje->respuesta = "S";
+            }else{
+                $mensaje->respuesta = "N";
+                $mensaje->data = validation_errors();
+            }
+        }else{
+            $mensaje->respuesta = "N";
+            $mensaje->data = 'No se pudo procesar la solicitud. Intente recargar la pagina.';
+        }
+        $this->output->set_content_type('application/json')->set_output(json_encode(array_utf8_encode($mensaje)));
     }
 }
