@@ -218,7 +218,7 @@
                                 </label>
                             </div>
                             <div class="form-check col-md-3">
-                                <input class="form-check-input" type="checkbox" value="" id="certificado_cinco>
+                                <input class="form-check-input" type="checkbox" value="" id="certificado_cuatro">
                                 <label class="form-check-label" for="repite_curso">
                                     PERTENECE AL PROG. PUENTE
                                 </label>
@@ -237,20 +237,20 @@
                         <div class="row">
                             <div class="form-group col-md-3">
                                 <label for="nombres">Nombres:</label>
-                                <input type="text" class="form-control" name="nombres">
+                                <input type="text" class="form-control" name="nombres_padre">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="apellido_pat">Apellido Paterno:</label>
-                                <input type="text" class="form-control" name="apellido_pat">
+                                <input type="text" class="form-control" name="apellido_pat_padre">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="apellido_mat">Apellido Materno:</label>
-                                <input type="text" class="form-control" name="apellido_mat">
+                                <input type="text" class="form-control" name="apellido_mat_padre">
                             </div>
                             <div class="form-group col-md-3">
                                 <label class="col-sm-8 control-label">Nivel Educacional:</label>
                                 <div class="col-sm-12" id="sandbox-container">
-                                    <select class="form-control" id="nivel_educacional" name="nivel_educacional">
+                                    <select class="form-control" id="nivel_educacional" name="nivel_educacional_padre">
                                         <option value="">Seleccione...</option>
                                         <?php
                                         foreach ($nivel_educacional as $row) {
@@ -264,19 +264,19 @@
                         <div class="row">
                             <div class="form-group col-md-4">
                                 <label for="apellido_mat">Rut:</label>
-                                <input type="text" class="form-control" name="rut">
+                                <input type="text" class="form-control" name="rut_padre">
                             </div>
                             <div class="form-group col-md-2">
                                 <label for="nombres">Fecha Nacimiento:</label>
-                                <input type="date" class="form-control" name="fecha_nacimiento">
+                                <input type="date" class="form-control" name="fecha_nacimiento_padre">
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="nombres">Direccion:</label>
-                                <input type="text" class="form-control" name="domicilio">
+                                <input type="text" class="form-control" name="domicilio_padre">
                             </div>
                             <div class="form-group col-md-2">
                                 <label for="nombres">Ingreso:</label>
-                                <input type="number" class="form-control" name="fecha_nacimiento">
+                                <input type="number" class="form-control" name="ingreso_padre">
                             </div>
                         </div>
                     </div>
@@ -289,20 +289,20 @@
                         <div class="row">
                             <div class="form-group col-md-3">
                                 <label for="nombres">Nombres:</label>
-                                <input type="text" class="form-control" name="nombres">
+                                <input type="text" class="form-control" name="nombres_madre">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="apellido_pat">Apellido Paterno:</label>
-                                <input type="text" class="form-control" name="apellido_pat">
+                                <input type="text" class="form-control" name="apellido_pat_madre">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="apellido_mat">Apellido Materno:</label>
-                                <input type="text" class="form-control" name="apellido_mat">
+                                <input type="text" class="form-control" name="apellido_mat_madre">
                             </div>
                             <div class="form-group col-md-3">
                                 <label class="col-sm-8 control-label">Nivel Educacional:</label>
                                 <div class="col-sm-12" id="sandbox-container">
-                                    <select class="form-control" id="nivel_educacional" name="nivel_educacional">
+                                    <select class="form-control" id="nivel_educacional" name="nivel_educacional_madre">
                                         <option value="">Seleccione...</option>
                                         <?php
                                         foreach ($nivel_educacional as $row) {
@@ -316,19 +316,19 @@
                         <div class="row">
                             <div class="form-group col-md-4">
                                 <label for="apellido_mat">Rut:</label>
-                                <input type="text" class="form-control" name="rut">
+                                <input type="text" class="form-control" name="rut_madre">
                             </div>
                             <div class="form-group col-md-2">
                                 <label for="nombres">Fecha Nacimiento:</label>
-                                <input type="date" class="form-control" name="fecha_nacimiento">
+                                <input type="date" class="form-control" name="fecha_nacimiento_madre">
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="nombres">Direccion:</label>
-                                <input type="text" class="form-control" name="domicilio">
+                                <input type="text" class="form-control" name="domicilio_madre">
                             </div>
                             <div class="form-group col-md-2">
                                 <label for="nombres">Ingreso:</label>
-                                <input type="number" class="form-control" name="fecha_nacimiento">
+                                <input type="number" class="form-control" name="ingreso_madre">
                             </div>
                         </div>
                     </div>
@@ -341,39 +341,39 @@
                         <div class="row">
                             <div class="form-group col-md-2">
                                 <label for="integrantes">Integrantes:</label>
-                                <input type="number" class="form-control" name="integrantes">
+                                <input type="number" class="form-control" name="integrantes" value="0">
                             </div>
                             <div class="form-group col-md-2">
                                 <label for="integrantes">N* Hermanos:</label>
-                                <input type="number" class="form-control" name="integrantes">
+                                <input type="number" class="form-control" name="n_hermanos" value="0">
                             </div>
                             <div class="form-check col-md-3" style="padding-top: 30px;">
-                                <input class="form-check-input" type="checkbox" value="" id="repite_curso">
+                                <input class="form-check-input" type="checkbox" value="" id="hermanos_estudiando">
                                 <label class="form-check-label" for="repite_curso">
                                     HERMANOS ESTUDIANDO
                                 </label>
                             </div>
                             <div class="form-group col-md-2">
                                 <label for="integrantes">Educacion Basica:</label>
-                                <input type="number" class="form-control" name="integrantes">
+                                <input type="number" class="form-control" name="educ_basica" value="0">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="integrantes">Educacion Media:</label>
-                                <input type="number" class="form-control" name="integrantes">
+                                <input type="number" class="form-control" name="educ_media" value="0">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-3">
                                 <label for="integrantes">Educacion Universitaria:</label>
-                                <input type="number" class="form-control" name="integrantes">
+                                <input type="number" class="form-control" name="educ_uni" value="0">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="integrantes">Abuelos:</label>
-                                <input type="number" class="form-control" name="integrantes">
+                                <input type="number" class="form-control" name="abuelos" value="0">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="integrantes">Tios:</label>
-                                <input type="number" class="form-control" name="integrantes">
+                                <input type="number" class="form-control" name="tios" value="0">
                             </div>
                         </div>
                     </div>
@@ -387,7 +387,7 @@
                             <div class="form-group col-md-3">
                                 <label class="col-sm-8 control-label">Jefe de Hogar:</label>
                                 <div class="col-sm-12" id="sandbox-container">
-                                    <select class="form-control" id="nivel_educacional" name="nivel_educacional">
+                                    <select class="form-control" id="jefe_hogar" name="jefe_hogar">
                                         <option value="">Seleccione...</option>
                                         <?php
                                         foreach ($vinculo_alumno as $row) {
@@ -399,12 +399,12 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="apellido_mat">Rut:</label>
-                                <input type="text" class="form-control" name="rut">
+                                <input type="text" class="form-control" name="rut_jefe_hogar">
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="col-sm-8 control-label">Religion:</label>
                                 <div class="col-sm-12" id="sandbox-container">
-                                    <select class="form-control" id="nivel_educacional" name="nivel_educacional">
+                                    <select class="form-control" id="religion" name="religion">
                                         <option value="">Seleccione...</option>
                                         <?php
                                         foreach ($religion as $row) {
@@ -419,7 +419,7 @@
                             <div class="form-group col-md-4">
                                 <label class="col-sm-8 control-label">Prevision:</label>
                                 <div class="col-sm-12" id="sandbox-container">
-                                    <select class="form-control" id="nivel_educacional" name="nivel_educacional">
+                                    <select class="form-control" id="prevision" name="prevision">
                                         <option value="">Seleccione...</option>
                                         <?php
                                         foreach ($prevision as $row) {
@@ -432,7 +432,7 @@
                             <div class="form-group col-md-4">
                                 <label class="col-sm-8 control-label">Salud:</label>
                                 <div class="col-sm-12" id="sandbox-container">
-                                    <select class="form-control" id="nivel_educacional" name="nivel_educacional">
+                                    <select class="form-control" id="salud" name="salud">
                                         <option value="">Seleccione...</option>
                                         <?php
                                         foreach ($salud as $row) {
@@ -456,30 +456,30 @@
                         <div class="row">
                             <div class="form-group col-md-3">
                                 <label for="apellido_mat">Rut:</label>
-                                <input type="text" class="form-control" name="rut">
+                                <input type="text" class="form-control" name="rut_apoderado">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="apellido_mat">Nombres:</label>
-                                <input type="text" class="form-control" name="rut">
+                                <input type="text" class="form-control" name="nombre_apoderado">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="apellido_mat">Apellido Paterno:</label>
-                                <input type="text" class="form-control" name="rut">
+                                <input type="text" class="form-control" name="apellido_pat_apoderado">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="apellido_mat">Apellido Materno:</label>
-                                <input type="text" class="form-control" name="rut">
+                                <input type="text" class="form-control" name="apellido_mat_apoderado">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-4">
                                 <label for="apellido_mat">Telefono:</label>
-                                <input type="text" class="form-control" name="rut">
+                                <input type="text" class="form-control" name="numero_apoderado">
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="col-sm-8 control-label">Vinculo con Alumno:</label>
                                 <div class="col-sm-12" id="sandbox-container">
-                                    <select class="form-control" id="nivel_educacional" name="nivel_educacional">
+                                    <select class="form-control" id="vinculo_alumno" name="vinculo_alumno">
                                         <option value="">Seleccione...</option>
                                         <?php
                                         foreach ($vinculo_alumno as $row) {
@@ -492,7 +492,7 @@
                             <div class="form-group col-md-4">
                                 <label class="col-sm-8 control-label">Tipo Apoderado:</label>
                                 <div class="col-sm-12" id="sandbox-container">
-                                    <select class="form-control" id="nivel_educacional" name="nivel_educacional">
+                                    <select class="form-control" id="tipo_apoderado" name="tipo_apoderado">
                                         <option value="">Seleccione...</option>
                                         <?php
                                         foreach ($tipo_apoderado as $row) {
@@ -503,6 +503,12 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-4 col-md-offset-1">
+                            <button type="button" class="btn btn-primary" id="boton_registro"><span class="glyphicon glyphicon-plus"></span> Registrar Datos Alumno</button>
+                        </div>
+                        <div class="clearfix"></div>
                     </div>
                 </div>
                 <!-- FIN FORMULARIO DATOS JEFE DE HOGAR -->
