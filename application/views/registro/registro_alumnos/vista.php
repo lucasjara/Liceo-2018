@@ -8,6 +8,11 @@
 ?>
 
 <br>
+<style>
+    input{
+        text-transform: uppercase;
+    }
+</style>
 <div class="panel panel-primary">
     <div class="panel-heading">Sistema de Registro Liceo Politecnico de Curacautin</div>
     <div class="panel-body">
@@ -41,7 +46,7 @@
                         <div class="row">
                             <div class="form-group col-md-4">
                                 <label for="apellido_mat">Rut:</label>
-                                <input type="text" class="form-control" name="rut">
+                                <input type="text" class="form-control" name="rut" maxlength="9">
                             </div>
                             <div class="form-group col-md-2">
                                 <label for="nombres">Fecha Nacimiento:</label>

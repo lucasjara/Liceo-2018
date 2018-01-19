@@ -37,18 +37,48 @@ class Registro_alumnos extends CI_Controller
         $mensaje = new stdClass();
         $this->load->helper('array_utf8');
         if ($this->input->post()) {
-            if ($this->validar_datos_alumno() && $this->validar_datos_padre() && $this->validar_datos_madre() && $this->validar_datos_familia() && $this->validar_datos_jefe_hogar()  && $this->validar_datos_apoderado()) {
+            if ($this->validar_datos_alumno()){// && $this->validar_datos_padre() && $this->validar_datos_madre() && $this->validar_datos_familia() && $this->validar_datos_jefe_hogar()  && $this->validar_datos_apoderado()) {
+
+                $arreglo_alumno = array(
+                    'nombres' => $this->input->post('nombres'),
+                    'apellido_pat' => $this->input->post('apellido_pat'),
+                    'apellido_mat' => $this->input->post('apellido_mat'),
+                    'rut' => $this->input->post('rut'),
+                    'fecha_nacimiento' => $this->input->post('fecha_nacimiento'),
+                    'domicilio' => $this->input->post('domicilio'),
+                    'numero' => $this->input->post('numero')
+                );
+                $arreglo_alumno = array(
+                    'nombres' => $this->input->post('nombres'),
+                    'apellido_pat' => $this->input->post('apellido_pat'),
+                    'apellido_mat' => $this->input->post('apellido_mat'),
+                    'rut' => $this->input->post('rut'),
+                    'fecha_nacimiento' => $this->input->post('fecha_nacimiento'),
+                    'domicilio' => $this->input->post('domicilio'),
+                    'numero' => $this->input->post('numero')
+                );
+                $arreglo_padre = array(
+                    ''
+                );
+                $arreglo_madre = array(
+                    ''
+                );
                 $id = $this->input->post('id');
                 $nombres = $this->input->post('nombres');
                 $fecha_nacimiento = $this->input->post('fecha_nacimiento');
                 $domicilio = $this->input->post('domicilio');
                 $numero = $this->input->post('numero');
+                $this->load->model('registro/registro_model','registro_model');
+                $registro = $this->registro_model->transaccion_registrar_alumno($arreglo_alumno);
+                if($registro == true){
+                    $mensaje->respuesta = "S";
+                    $mensaje->data = "Informacion Registrada Correctamente";
+                }else{
+                    $mensaje->respuesta = "N";
+                    $mensaje->data = "Error en la Transaccion";
+                }
 
-                //$this->load->model('mantenedores/alumnos_model','alumnos_model');
-                //$this->alumnos_model->editar_alumno($id,$nombres,$fecha_nacimiento,$domicilio,$numero);
-                $mensaje->respuesta = "S";
-                $mensaje->data = "Usuario Modificado Correctamente";
-            }else{
+            }else {
                 $mensaje->respuesta = "N";
                 $mensaje->data = validation_errors();
             }
@@ -63,7 +93,7 @@ class Registro_alumnos extends CI_Controller
         $this->form_validation->set_rules("nombres", "Nombres Alumno", "required|min_length[3]");
         $this->form_validation->set_rules("apellido_pat", "Apellido Paterno Alumno", "required|min_length[3]|max_length[200]");
         $this->form_validation->set_rules("apellido_mat", "Apellido Materno Alumno", "required|min_length[3]|max_length[200]");
-        $this->form_validation->set_rules("rut", "Rut Alumno", "required|min_length[8]");
+        $this->form_validation->set_rules("rut", "Rut Alumno", "required|min_length[11]|max_length[12]");
         $this->form_validation->set_rules("fecha_nacimiento", "Fecha Nacimiento Alumno", "required|exact_length[10]");
         $this->form_validation->set_rules("domicilio", "Direccion Alumno", "required|min_length[3]|max_length[200]");
         $this->form_validation->set_rules("numero", "Telefono Alumno", "required|min_length[3]|max_length[200]");

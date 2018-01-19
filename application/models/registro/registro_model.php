@@ -8,6 +8,38 @@
 
 class registro_model extends CI_Model
 {
+    function transaccion_registrar_alumno($alumno){
+        $mensaje = new stdClass();
+        $this->db->trans_begin();
+        $id_alumno =$this->ingresar_alumno($alumno);
+
+        if ($this->db->trans_status() === FALSE) {
+            $this->db->trans_rollback();
+            $mensaje->respuesta = "N";
+            $mensaje->data = " No se pudo procesar la transacci�n";
+        } else {
+            $this->db->trans_commit();
+        }
+        return $mensaje;
+    }
+    function ingresar_alumno($alumno){
+        //todo |Formato Base de datos --> Rut|
+        $alumno["rut"] = str_replace('.','',$alumno["rut"]);
+        $alumno["rut"] = str_replace('-','',$alumno["rut"]);
+        $alumno["dv"] = substr($alumno["rut"],-1);
+        $alumno["rut"] = substr($alumno["rut"], 0, -1);
+
+        $this->db->set('RUT',$alumno["rut"]);
+        $this->db->set('DV', $alumno["dv"]);
+        $this->db->set('NOMBRES', strtoupper($alumno["nombres"]));
+        $this->db->set('APELLIDO_PAT', strtoupper($alumno["apellido_pat"]));
+        $this->db->set('APELLIDO_MAT', strtoupper($alumno["apellido_mat"]));
+        $this->db->set('FECHA_NACIMIENTO', $alumno["fecha_nacimiento"]);
+        $this->db->set('DOMICILIO', strtoupper($alumno["domicilio"]));
+        $this->db->set('NUMERO', strtoupper($alumno["numero"]));
+        $this->db->insert("tb_alumnos");
+        return $this->db->insert_id();
+    }
     function obtener_comunas(){
         $this->db->select("*")->from('tb_comuna');
         $query = $this->db->get();
