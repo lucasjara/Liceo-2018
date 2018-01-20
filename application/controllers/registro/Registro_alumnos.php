@@ -38,7 +38,6 @@ class Registro_alumnos extends CI_Controller
         $this->load->helper('array_utf8');
         if ($this->input->post()) {
             if ($this->validar_datos_alumno()){// && $this->validar_datos_padre() && $this->validar_datos_madre() && $this->validar_datos_familia() && $this->validar_datos_jefe_hogar()  && $this->validar_datos_apoderado()) {
-
                 $arreglo_alumno = array(
                     'nombres' => $this->input->post('nombres'),
                     'apellido_pat' => $this->input->post('apellido_pat'),
@@ -48,28 +47,59 @@ class Registro_alumnos extends CI_Controller
                     'domicilio' => $this->input->post('domicilio'),
                     'numero' => $this->input->post('numero')
                 );
-                $arreglo_alumno = array(
-                    'nombres' => $this->input->post('nombres'),
-                    'apellido_pat' => $this->input->post('apellido_pat'),
-                    'apellido_mat' => $this->input->post('apellido_mat'),
-                    'rut' => $this->input->post('rut'),
-                    'fecha_nacimiento' => $this->input->post('fecha_nacimiento'),
-                    'domicilio' => $this->input->post('domicilio'),
-                    'numero' => $this->input->post('numero')
+                $arreglo_matricula_alumno = array(
+                    'TB_CURSO_ID' => $this->input->post('curso'),
+                    // todo -> CAMPO OBTENIDO EN TRANSACCIÓN
+                    'TB_ALUMNO_ID' => '',
+                    'TB_ESPECIALIDAD_ID' => $this->input->post('especialidad'),
+                    'TB_ESTABLECIMIENTO_ID' => $this->input->post('establecimiento'),
+                    'ANIO' => (int)date('Y'),
+                    'F_MATRICULA' => $this->input->post('fecha_matricula')
+                );
+                // TODO --> Analizar Check
+                $repite_curso=$this->input->post('repite_curso');
+                if ($repite_curso == "true"){
+                    $repite_curso = 'S';
+                    $cual =$this->input->post('cual');
+                }else{
+                    $repite_curso = 'N';
+                    $cual ='';
+                }
+                $certificado_uno=$this->input->post('certificado_uno');
+                if ($certificado_uno === "true"){$certificado_uno = 'S';}else{$certificado_uno = 'N';}
+                $certificado_dos=$this->input->post('certificado_dos');
+                if ($certificado_dos === "true"){$certificado_dos = 'S';}else{$certificado_dos = 'N';}
+                $certificado_tres=$this->input->post('certificado_tres');
+                if ($certificado_tres === "true"){$certificado_tres = 'S';}else{$certificado_tres = 'N';}
+                $certificado_cuatro=$this->input->post('certificado_cuatro');
+                if ($certificado_cuatro === "true"){$certificado_cuatro = 'S';}else{$certificado_cuatro = 'N';}
+                $certificado_cinco=$this->input->post('certificado_cinco');
+                if ($certificado_cinco === "true"){$certificado_cinco = 'S';}else{$certificado_cinco = 'N';}
+                // TODO --> Fin Analizar Check
+                $arreglo_antecendentes_alumno = array(
+                    'VILLA' => strtoupper($this->input->post('poblacion')),
+                    'REPITE_CURSO' => $repite_curso,
+                    'CUAL' => strtoupper($cual),
+                    'OTROS' => strtoupper($this->input->post('establecimiento')),
+                    'CERTIFICADO_UNO' => $certificado_uno,
+                    'CERTIFICADO_DOS' => $certificado_dos,
+                    'CERTIFICADO_TRES' => $certificado_tres,
+                    'CERTIFICADO_CUATRO' => $certificado_cuatro,
+                    'CERTIFICADO_CINCO' => $certificado_cinco,
+                    'TB_VIAJA_ID' => $this->input->post('viaja'),
+                    'TB_SECTOR_VIVE_ID' => $this->input->post('sector_vive'),
+                    'TB_ASCENDENCIA_ID' => $this->input->post('ascendencia'),
+                    // todo -> CAMPO OBTENIDO EN TRANSACCIÓN
+                    'TB_ALUMNO_ID' => ''
                 );
                 $arreglo_padre = array(
-                    ''
+                    'RUT' => $this->input->post("rut_padre")
                 );
                 $arreglo_madre = array(
                     ''
                 );
-                $id = $this->input->post('id');
-                $nombres = $this->input->post('nombres');
-                $fecha_nacimiento = $this->input->post('fecha_nacimiento');
-                $domicilio = $this->input->post('domicilio');
-                $numero = $this->input->post('numero');
                 $this->load->model('registro/registro_model','registro_model');
-                $registro = $this->registro_model->transaccion_registrar_alumno($arreglo_alumno);
+                $registro = $this->registro_model->transaccion_registrar_alumno($arreglo_alumno,$arreglo_matricula_alumno,$arreglo_antecendentes_alumno);
                 if($registro == true){
                     $mensaje->respuesta = "S";
                     $mensaje->data = "Informacion Registrada Correctamente";
@@ -151,7 +181,7 @@ class Registro_alumnos extends CI_Controller
     }
     function validar_datos_jefe_hogar(){
         $this->form_validation->set_rules("jefe_hogar", "Jefe Hogar", "required|is_numeric");
-        //$this->form_validation->set_rules("rut_jefe_hogar", "Rut Jefe Hogar", "required|min_length[3]|max_length[20]");
+        $this->form_validation->set_rules("rut_jefe_hogar", "Rut Jefe Hogar", "required|min_length[3]|max_length[20]");
         $this->form_validation->set_rules("religion", "Religion", "required|is_numeric");
         $this->form_validation->set_rules("prevision", "Prevision", "required|is_numeric");
         $this->form_validation->set_rules("salud", "Salud", "required|is_numeric");
@@ -167,5 +197,6 @@ class Registro_alumnos extends CI_Controller
         $this->form_validation->set_rules("tipo_apoderado", "Prevision", "required|is_numeric");
         return $this->form_validation->run();
     }
+
 
 }

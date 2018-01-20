@@ -7,18 +7,24 @@ $(document).ready(function () {
     $("#boton_registro").on('click', function () {
         var array= {
             // todo Datos Alumno
-            nombres: $("input[name=nombres]").val(),
-            apellido_pat:$("input[name=apellido_pat]").val(),
-            apellido_mat:$("input[name=apellido_mat]").val(),
-            rut:$("input[name=rut]").val(),
-            fecha_nacimiento:$("input[name=fecha_nacimiento]").val(),
-            domicilio:$("input[name=domicilio]").val(),
-            numero:$("input[name=numero]").val(),
-            curso:$("select[name=curso]").val(),
-            fecha_matricula:$("input[name=fecha_matricula]").val(),
+            nombres: $("input[name=nombres]").val(), //
+            apellido_pat:$("input[name=apellido_pat]").val(), //
+            apellido_mat:$("input[name=apellido_mat]").val(), //
+            rut:$("input[name=rut]").val(), //
+            fecha_nacimiento:$("input[name=fecha_nacimiento]").val(), //
+            domicilio:$("input[name=domicilio]").val(), //
+            numero:$("input[name=numero]").val(), //
+            curso:$("select[name=curso]").val(), //
+            fecha_matricula:$("input[name=fecha_matricula]").val(), //
             poblacion:$("input[name=poblacion]").val(),
             comuna:$("select[name=comuna]").val(),
             establecimiento:$("select[name=establecimiento]").val(),
+            repite_curso: $("#repite_curso").prop('checked'),
+            certificado_uno: $("#certificado_uno").prop('checked'),
+            certificado_dos: $("#certificado_dos").prop('checked'),
+            certificado_tres: $("#certificado_tres").prop('checked'),
+            certificado_cuatro: $("#certificado_cuatro").prop('checked'),
+            certificado_cinco: $("#certificado_cinco").prop('checked'),
             cual:$("input[name=cual]").val(),
             especialidad:$("select[name=especialidad]").val(),
             sector_vive:$("select[name=sector_vive]").val(),

@@ -223,7 +223,7 @@
                                 </label>
                             </div>
                             <div class="form-check col-md-3">
-                                <input class="form-check-input" type="checkbox" value="" id="certificado_cuatro">
+                                <input class="form-check-input" type="checkbox" value="" id="certificado_cinco">
                                 <label class="form-check-label" for="repite_curso">
                                     PERTENECE AL PROG. PUENTE
                                 </label>
