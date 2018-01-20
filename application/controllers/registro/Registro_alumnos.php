@@ -76,7 +76,7 @@ class Registro_alumnos extends CI_Controller
                 $certificado_cinco=$this->input->post('certificado_cinco');
                 if ($certificado_cinco === "true"){$certificado_cinco = 'S';}else{$certificado_cinco = 'N';}
                 // TODO --> Fin Analizar Check
-                $arreglo_antecendentes_alumno = array(
+                $arreglo_antecedentes_alumno = array(
                     'VILLA' => strtoupper($this->input->post('poblacion')),
                     'REPITE_CURSO' => $repite_curso,
                     'CUAL' => strtoupper($cual),
@@ -89,17 +89,102 @@ class Registro_alumnos extends CI_Controller
                     'TB_VIAJA_ID' => $this->input->post('viaja'),
                     'TB_SECTOR_VIVE_ID' => $this->input->post('sector_vive'),
                     'TB_ASCENDENCIA_ID' => $this->input->post('ascendencia'),
+                    'TB_RELIGION_ID' => $this->input->post('religion'),
+                    'TB_PREVISION_ID' => $this->input->post('prevision'),
+                    'TB_SALUD_ID' => $this->input->post('salud'),
                     // todo -> CAMPO OBTENIDO EN TRANSACCIÓN
                     'TB_ALUMNO_ID' => ''
                 );
+                // todo --> Formato Rut BD
+                $rut_padre = $this->input->post("rut_padre");
+                $rut_padre = str_replace('.','',$rut_padre);
+                $rut_padre = str_replace('-','',$rut_padre);
+                $rut_padre_dv = substr($rut_padre,-1);
+                $rut_padre = substr($rut_padre, 0, -1);
                 $arreglo_padre = array(
-                    'RUT' => $this->input->post("rut_padre")
+                    'RUT' => $rut_padre,
+                    'DV' => $rut_padre_dv,
+                    'NOMBRES' => $this->input->post("nombres_padre"),
+                    'APELLIDO_PAT' => $this->input->post("apellido_pat_padre"),
+                    'APELLIDO_MAT' => $this->input->post("apellido_mat_padre"),
+                    'FECHA_NACIMIENTO' => $this->input->post("fecha_nacimiento_padre"),
+                    'TELEFONO' => $this->input->post("numero_padre"),
+                    'OCUPACION' => $this->input->post("ocupacion_padre"),
+                    'DOMICILIO' => $this->input->post("domicilio_padre"),
+                    // todo -> CAMPO OBTENIDO EN TRANSACCIÓN
+                    'TB_ALUMNO_ID' => '',
+                    'TB_VINCULO_ALUMNO_ID' => 2,
+                    'INGRESO' => $this->input->post("ingreso_padre")
                 );
+                // todo --> Formato Rut BD
+                $rut_madre = $this->input->post("rut_madre");
+                $rut_madre = str_replace('.','',$rut_madre);
+                $rut_madre = str_replace('-','',$rut_madre);
+                $rut_madre_dv = substr($rut_madre,-1);
+                $rut_madre = substr($rut_madre, 0, -1);
                 $arreglo_madre = array(
-                    ''
+                    'RUT' => $rut_madre,
+                    'DV' => $rut_madre_dv,
+                    'NOMBRES' => $this->input->post("nombres_madre"),
+                    'APELLIDO_PAT' => $this->input->post("apellido_pat_madre"),
+                    'APELLIDO_MAT' => $this->input->post("apellido_mat_madre"),
+                    'FECHA_NACIMIENTO' => $this->input->post("fecha_nacimiento_madre"),
+                    'TELEFONO' => $this->input->post("numero_madre"),
+                    'OCUPACION' => $this->input->post("ocupacion_madre"),
+                    'DOMICILIO' => $this->input->post("domicilio_madre"),
+                    // todo -> CAMPO OBTENIDO EN TRANSACCIÓN
+                    'TB_ALUMNO_ID' => '',
+                    'TB_VINCULO_ALUMNO_ID' => 1,
+                    'INGRESO' => $this->input->post("ingreso_madre")
+                );
+                if ($this->input->post("h_estudiando") == "true"){
+                    $h_estudiando ='S';
+                }else{
+                    $h_estudiando = 'N';
+                }
+                $arreglo_antecedentes_familiares = array(
+                    'N_INTEGRANTES' => $this->input->post("integrantes"),
+                    'N_HERMANOS' => $this->input->post("n_hermanos"),
+                    'H_ESTUDIANDO' => $h_estudiando,
+                    'EDUC_BASICA' => $this->input->post("educ_basica"),
+                    'EDUC_MEDIA' => $this->input->post("educ_media"),
+                    'EDUC_UNI' => $this->input->post("educ_uni"),
+                    'N_ABUELOS' => $this->input->post("abuelos"),
+                    'N_TIOS' => $this->input->post("tios"),
+                    // todo -> CAMPO OBTENIDO EN TRANSACCIÓN
+                    'TB_ALUMNO_ID' => ''
+                );
+                $rut_jefe_hogar = $this->input->post("rut_jefe_hogar");
+                $rut_jefe_hogar = str_replace('.','',$rut_jefe_hogar);
+                $rut_jefe_hogar = str_replace('-','',$rut_jefe_hogar);
+                $rut_jefe_hogar_dv = substr($rut_jefe_hogar,-1);
+                $rut_jefe_hogar = substr($rut_jefe_hogar, 0, -1);
+                $arreglo_jefe_hogar = array(
+                    'RUT' => $rut_jefe_hogar,
+                    'DV' => $rut_jefe_hogar_dv,
+                    'TB_VINCULO_ALUMNO_ID' => $this->input->post("jefe_hogar"),
+                    // todo -> CAMPO OBTENIDO EN TRANSACCIÓN
+                    'TB_ALUMNO_ID' => ''
+                );
+                $rut_apoderado = $this->input->post("rut_apoderado");
+                $rut_apoderado = str_replace('.','',$rut_apoderado);
+                $rut_apoderado = str_replace('-','',$rut_apoderado);
+                $rut_apoderado_dv = substr($rut_apoderado,-1);
+                $rut_apoderado = substr($rut_apoderado, 0, -1);
+                $arreglo_apoderado = array(
+                    'RUT' => $rut_apoderado,
+                    'DV' => $rut_apoderado_dv,
+                    'NOMBRES' => $this->input->post("nombre_apoderado"),
+                    'APELLIDO_PAT' => $this->input->post("apellido_pat_apoderado"),
+                    'APELLIDO_MAT' => $this->input->post("apellido_mat_apoderado"),
+                    'NUMERO' => $this->input->post("numero_apoderado"),
+                    'TB_VINCULO_ALUMNO_ID' => $this->input->post("vinculo_alumno"),
+                    'TB_TIPO_APODERADO_ID' => $this->input->post("tipo_apoderado"),
+                    // todo -> CAMPO OBTENIDO EN TRANSACCIÓN
+                    'TB_ALUMNO_ID' => ''
                 );
                 $this->load->model('registro/registro_model','registro_model');
-                $registro = $this->registro_model->transaccion_registrar_alumno($arreglo_alumno,$arreglo_matricula_alumno,$arreglo_antecendentes_alumno);
+                $registro = $this->registro_model->transaccion_registrar_alumno($arreglo_alumno,$arreglo_matricula_alumno,$arreglo_antecedentes_alumno,$arreglo_padre,$arreglo_madre,$arreglo_antecedentes_familiares,$arreglo_jefe_hogar,$arreglo_apoderado);
                 if($registro == true){
                     $mensaje->respuesta = "S";
                     $mensaje->data = "Informacion Registrada Correctamente";

@@ -244,13 +244,17 @@
                                 <label for="nombres">Nombres:</label>
                                 <input type="text" class="form-control" name="nombres_padre">
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-2">
                                 <label for="apellido_pat">Apellido Paterno:</label>
                                 <input type="text" class="form-control" name="apellido_pat_padre">
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-2">
                                 <label for="apellido_mat">Apellido Materno:</label>
                                 <input type="text" class="form-control" name="apellido_mat_padre">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="apellido_mat">Telefono:</label>
+                                <input type="text" class="form-control" name="numero_padre">
                             </div>
                             <div class="form-group col-md-3">
                                 <label class="col-sm-8 control-label">Nivel Educacional:</label>
@@ -267,15 +271,19 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-2">
                                 <label for="apellido_mat">Rut:</label>
                                 <input type="text" class="form-control" name="rut_padre">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="nombres">Ocupacion:</label>
+                                <input type="text" class="form-control" name="ocupacion_padre">
                             </div>
                             <div class="form-group col-md-2">
                                 <label for="nombres">Fecha Nacimiento:</label>
                                 <input type="date" class="form-control" name="fecha_nacimiento_padre">
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 <label for="nombres">Direccion:</label>
                                 <input type="text" class="form-control" name="domicilio_padre">
                             </div>
@@ -296,13 +304,17 @@
                                 <label for="nombres">Nombres:</label>
                                 <input type="text" class="form-control" name="nombres_madre">
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-2">
                                 <label for="apellido_pat">Apellido Paterno:</label>
                                 <input type="text" class="form-control" name="apellido_pat_madre">
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-2">
                                 <label for="apellido_mat">Apellido Materno:</label>
                                 <input type="text" class="form-control" name="apellido_mat_madre">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="apellido_mat">Telefono:</label>
+                                <input type="text" class="form-control" name="numero_madre">
                             </div>
                             <div class="form-group col-md-3">
                                 <label class="col-sm-8 control-label">Nivel Educacional:</label>
@@ -319,15 +331,19 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-2">
                                 <label for="apellido_mat">Rut:</label>
                                 <input type="text" class="form-control" name="rut_madre">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="apellido_mat">Ocupacion:</label>
+                                <input type="text" class="form-control" name="ocupacion_madre">
                             </div>
                             <div class="form-group col-md-2">
                                 <label for="nombres">Fecha Nacimiento:</label>
                                 <input type="date" class="form-control" name="fecha_nacimiento_madre">
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 <label for="nombres">Direccion:</label>
                                 <input type="text" class="form-control" name="domicilio_madre">
                             </div>
@@ -353,7 +369,7 @@
                                 <input type="number" class="form-control" name="n_hermanos" value="0">
                             </div>
                             <div class="form-check col-md-3" style="padding-top: 30px;">
-                                <input class="form-check-input" type="checkbox" value="" id="hermanos_estudiando">
+                                <input class="form-check-input" type="checkbox" value="" id="h_estudiando">
                                 <label class="form-check-label" for="repite_curso">
                                     HERMANOS ESTUDIANDO
                                 </label>

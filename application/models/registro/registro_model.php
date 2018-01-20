@@ -8,7 +8,8 @@
 
 class registro_model extends CI_Model
 {
-    function transaccion_registrar_alumno($alumno,$matricula_alumno,$antecentes_alumno){
+
+    function transaccion_registrar_alumno($alumno,$matricula_alumno,$antecentes_alumno,$familiares_padre,$familiares_madre,$antecentes_familiares,$jefe_hogar,$apoderado){
         $mensaje = new stdClass();
         $this->db->trans_begin();
         $id_alumno = $this->ingresar_alumno($alumno);
@@ -16,6 +17,16 @@ class registro_model extends CI_Model
         $this->ingresar_matricula_alumno($matricula_alumno);
         $antecentes_alumno["TB_ALUMNO_ID"]  = $id_alumno;
         $this->ingresar_antecedentes_alumno($antecentes_alumno);
+        $familiares_padre["TB_ALUMNO_ID"]  = $id_alumno;
+        $this->ingresar_datos_familiar_alumno($familiares_padre);
+        $familiares_madre["TB_ALUMNO_ID"]  = $id_alumno;
+        $this->ingresar_datos_familiar_alumno($familiares_madre);
+        $antecentes_familiares["TB_ALUMNO_ID"]  = $id_alumno;
+        $this->ingresar_antecedentes_familiares_alumno($antecentes_familiares);
+        $jefe_hogar["TB_ALUMNO_ID"]  = $id_alumno;
+        $this->ingresar_jefe_hogar($jefe_hogar);
+        $apoderado["TB_ALUMNO_ID"]  = $id_alumno;
+        $this->ingresar_apoderado($jefe_hogar);
         if ($this->db->trans_status() === FALSE) {
             $this->db->trans_rollback();
             $mensaje->respuesta = "N";
@@ -50,7 +61,22 @@ class registro_model extends CI_Model
         $this->db->insert("tb_antecedentes",$antecentes_alumno);
         return $this->db->insert_id();
     }
-
+    function ingresar_datos_familiar_alumno($datos){
+        $this->db->insert("tb_familiares",$datos);
+        return $this->db->insert_id();
+    }
+    function ingresar_antecedentes_familiares_alumno($antecedentes_familiares){
+        $this->db->insert("tb_antecedentes_familiares",$antecedentes_familiares);
+        return $this->db->insert_id();
+    }
+    function ingresar_jefe_hogar($datos_jefe_hogar){
+        $this->db->insert("tb_jefe_hogar",$datos_jefe_hogar);
+        return $this->db->insert_id();
+    }
+    function ingresar_apoderado($datos_apoderado){
+        $this->db->insert("tb_apoderados",$datos_apoderado);
+        return $this->db->insert_id();
+    }
     function obtener_comunas(){
         $this->db->select("*")->from('tb_comuna')->order_by("descripcion");
         $query = $this->db->get();
