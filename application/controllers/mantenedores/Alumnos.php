@@ -25,8 +25,12 @@ class Alumnos extends CI_Controller
         $this->load->model('mantenedores/alumnos_model','alumnos_model');
         $data=  $this->alumnos_model->obtener_datos();
         for ($i=0;$i<count($data);$i++){
-            $data[$i]->ACCIONES ='<button type="submit" data-id="' . $data[$i]->ID . '" data-rut="' . $data[$i]->RUT . '" data-nombres="' . $data[$i]->NOMBRES . '" data-apellidos="' . $data[$i]->APELLIDOS . '" data-fecha-nacimiento="' . $data[$i]->FECHA_NACIMIENTO . '" data-domicilio="' . $data[$i]->DOMICILIO . '" data-numero="' . $data[$i]->NUMERO . '" class="btn btn-primary btn-xs btn_editar" title="Editar"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
-                                  <button type="submit" data-id="' . $data[$i]->ID . '" class="btn btn-danger btn-xs btn_eliminar" title="Eliminar"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>';
+            $data[$i]->ACCIONES ='<button type="submit" data-id="' . $data[$i]->ID . '" data-rut="' . $data[$i]->RUT . '" data-nombres="' . $data[$i]->NOMBRES . '" data-apellidos="' . $data[$i]->APELLIDOS . '" data-fecha-nacimiento="' . $data[$i]->FECHA_NACIMIENTO . '" data-domicilio="' . $data[$i]->DOMICILIO . '" data-numero="' . $data[$i]->NUMERO . '" class="btn btn-success btn-xs btn_editar" title="Editar"><span class="glyphicon glyphicon-pencil" aria-hidden="true"> EDITAR </span></button>
+                                  <button type="submit" data-id="' . $data[$i]->ID . '" class="btn btn-danger btn-xs btn_eliminar" title="Eliminar"><span class="glyphicon glyphicon-trash" aria-hidden="true"> ELIMINAR </span></button>
+                                  <form action="/codeigniter/registro/registro_alumnos" method="post"  style="margin-top: 2px;">
+                                    <input type="hidden" name="id" value="' . $data[$i]->ID . '">
+                                    <button type="submit"  class="btn btn-primary btn-xs btn_detalle" title="Detalle"><span class="glyphicon glyphicon-th-list"> DETALLE</span></button>
+                                   </form>';
         }
         $datos["data"] =$data;
         $this->output->set_content_type('application/json')->set_output(json_encode(array_utf8_encode($datos)));

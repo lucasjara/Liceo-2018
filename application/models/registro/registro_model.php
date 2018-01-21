@@ -13,20 +13,21 @@ class registro_model extends CI_Model
         $mensaje = new stdClass();
         $this->db->trans_begin();
         $id_alumno = $this->ingresar_alumno($alumno);
+
         $matricula_alumno["TB_ALUMNO_ID"]  = $id_alumno;
-        $this->ingresar_matricula_alumno($matricula_alumno);
+            $this->ingresar_matricula_alumno($matricula_alumno);
         $antecentes_alumno["TB_ALUMNO_ID"]  = $id_alumno;
-        $this->ingresar_antecedentes_alumno($antecentes_alumno);
+            $this->ingresar_antecedentes_alumno($antecentes_alumno);
         $familiares_padre["TB_ALUMNO_ID"]  = $id_alumno;
-        $this->ingresar_datos_familiar_alumno($familiares_padre);
+            $this->ingresar_datos_familiar_alumno($familiares_padre);
         $familiares_madre["TB_ALUMNO_ID"]  = $id_alumno;
-        $this->ingresar_datos_familiar_alumno($familiares_madre);
+            $this->ingresar_datos_familiar_alumno($familiares_madre);
         $antecentes_familiares["TB_ALUMNO_ID"]  = $id_alumno;
-        $this->ingresar_antecedentes_familiares_alumno($antecentes_familiares);
+            $this->ingresar_antecedentes_familiares_alumno($antecentes_familiares);
         $jefe_hogar["TB_ALUMNO_ID"]  = $id_alumno;
-        $this->ingresar_jefe_hogar($jefe_hogar);
+            $this->ingresar_jefe_hogar($jefe_hogar);
         $apoderado["TB_ALUMNO_ID"]  = $id_alumno;
-        $this->ingresar_apoderado($jefe_hogar);
+            $this->ingresar_apoderado($apoderado);
         if ($this->db->trans_status() === FALSE) {
             $this->db->trans_rollback();
             $mensaje->respuesta = "N";
@@ -144,6 +145,46 @@ class registro_model extends CI_Model
     }
     function obtener_tipo_apoderado(){
         $this->db->select("*")->from('tb_tipo_apoderado')->order_by("descripcion");
+        $query = $this->db->get();
+        return $query->result();
+    }
+    function obtener_datos_alumno($id){
+        $this->db->select("*")->from('tb_alumnos')->where('ID',$id);
+        $query = $this->db->get();
+        return $query->result();
+    }
+    function obtener_datos_antecedentes($id){
+        $this->db->select("*")->from('tb_antecedentes')->where('TB_ALUMNO_ID',$id);
+        $query = $this->db->get();
+        return $query->result();
+    }
+    function obtener_datos_antecedentes_familiares($id){
+        $this->db->select("*")->from('tb_antecedentes_familiares')->where('TB_ALUMNO_ID',$id);
+        $query = $this->db->get();
+        return $query->result();
+    }
+    function obtener_datos_apoderado($id){
+        $this->db->select("*")->from('tb_apoderados')->where('TB_ALUMNO_ID',$id);
+        $query = $this->db->get();
+        return $query->result();
+    }
+    function obtener_datos_padre($id){
+        $this->db->select("*")->from('tb_familiares')->where('TB_ALUMNO_ID',$id)->where('TB_VINCULO_ALUMNO_ID',2);
+        $query = $this->db->get();
+        return $query->result();
+    }
+    function obtener_datos_madre($id){
+        $this->db->select("*")->from('tb_familiares')->where('TB_ALUMNO_ID',$id)->where('TB_VINCULO_ALUMNO_ID',1);
+        $query = $this->db->get();
+        return $query->result();
+    }
+    function obtener_datos_jefe_hogar($id){
+        $this->db->select("*")->from('tb_jefe_hogar')->where('TB_ALUMNO_ID',$id);
+        $query = $this->db->get();
+        return $query->result();
+    }
+    function obtener_datos_matricula($id){
+        $this->db->select("*")->from('tb_matricula')->where('TB_ALUMNO_ID',$id);
         $query = $this->db->get();
         return $query->result();
     }

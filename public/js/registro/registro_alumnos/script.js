@@ -1,10 +1,10 @@
 $(document).ready(function () {
     $(".nav-tabs a").click(function(){
         $(this).tab('show');
-        //$("#div_alerta").html('');
-        //$("#div_alerta").removeClass('alert alert-danger');
     });
     $("#boton_registro").on('click', function () {
+        $("#div_alerta").html('');
+        $("#div_alerta").removeClass('alert alert-danger');
         var array= {
             // todo Datos Alumno
             nombres: $("input[name=nombres]").val(), //
@@ -86,9 +86,6 @@ $(document).ready(function () {
         });
         request.done(function (data) {
             if (data.respuesta == "S") {
-                $("#div_alerta").html('');
-                $("#div_alerta").removeClass('alert alert-danger');
-
                 $("#modal_generico_body").html(data.data);
                 $("#modal_generico").modal('show');
             }

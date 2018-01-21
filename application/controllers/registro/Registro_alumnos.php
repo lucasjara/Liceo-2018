@@ -16,6 +16,18 @@ class Registro_alumnos extends CI_Controller
     }
     function index(){
         $this->load->model('registro/registro_model','registro_model');
+        // todo --> Carga de Datos Alumno Ya registrado
+        $id = $this->input->post('id');
+        if($id != null && $id != ''){
+            $datos["alumno"] = $this->registro_model->obtener_datos_alumno($id);
+            $datos["matricula"] = $this->registro_model->obtener_datos_matricula($id);
+            $datos["antecedente"] = $this->registro_model->obtener_datos_antecedentes($id);
+            $datos["padre"] = $this->registro_model->obtener_datos_padre($id);
+            $datos["madre"] = $this->registro_model->obtener_datos_madre($id);
+            $datos["familia"] = $this->registro_model->obtener_datos_antecedentes_familiares($id);
+            $datos["jefe_hogar"] = $this->registro_model->obtener_datos_jefe_hogar($id);
+            $datos["apoderado"] = $this->registro_model->obtener_datos_apoderado($id);
+        }
         // Carga de Select
         $datos["comuna"] =$this->registro_model->obtener_comunas();
         $datos["curso"] =$this->registro_model->obtener_curso();
@@ -37,7 +49,7 @@ class Registro_alumnos extends CI_Controller
         $mensaje = new stdClass();
         $this->load->helper('array_utf8');
         if ($this->input->post()) {
-            if ($this->validar_datos_alumno()){// && $this->validar_datos_padre() && $this->validar_datos_madre() && $this->validar_datos_familia() && $this->validar_datos_jefe_hogar()  && $this->validar_datos_apoderado()) {
+            if ($this->validar_datos_alumno() && $this->validar_datos_padre() && $this->validar_datos_madre() && $this->validar_datos_familia() && $this->validar_datos_jefe_hogar()  && $this->validar_datos_apoderado()) {
                 $arreglo_alumno = array(
                     'nombres' => $this->input->post('nombres'),
                     'apellido_pat' => $this->input->post('apellido_pat'),
@@ -47,6 +59,7 @@ class Registro_alumnos extends CI_Controller
                     'domicilio' => $this->input->post('domicilio'),
                     'numero' => $this->input->post('numero')
                 );
+
                 $arreglo_matricula_alumno = array(
                     'TB_CURSO_ID' => $this->input->post('curso'),
                     // todo -> CAMPO OBTENIDO EN TRANSACCIÓN
@@ -56,6 +69,7 @@ class Registro_alumnos extends CI_Controller
                     'ANIO' => (int)date('Y'),
                     'F_MATRICULA' => $this->input->post('fecha_matricula')
                 );
+
                 // TODO --> Analizar Check
                 $repite_curso=$this->input->post('repite_curso');
                 if ($repite_curso == "true"){
@@ -95,12 +109,14 @@ class Registro_alumnos extends CI_Controller
                     // todo -> CAMPO OBTENIDO EN TRANSACCIÓN
                     'TB_ALUMNO_ID' => ''
                 );
+
                 // todo --> Formato Rut BD
                 $rut_padre = $this->input->post("rut_padre");
                 $rut_padre = str_replace('.','',$rut_padre);
                 $rut_padre = str_replace('-','',$rut_padre);
                 $rut_padre_dv = substr($rut_padre,-1);
                 $rut_padre = substr($rut_padre, 0, -1);
+
                 $arreglo_padre = array(
                     'RUT' => $rut_padre,
                     'DV' => $rut_padre_dv,
@@ -122,6 +138,7 @@ class Registro_alumnos extends CI_Controller
                 $rut_madre = str_replace('-','',$rut_madre);
                 $rut_madre_dv = substr($rut_madre,-1);
                 $rut_madre = substr($rut_madre, 0, -1);
+
                 $arreglo_madre = array(
                     'RUT' => $rut_madre,
                     'DV' => $rut_madre_dv,
@@ -137,11 +154,13 @@ class Registro_alumnos extends CI_Controller
                     'TB_VINCULO_ALUMNO_ID' => 1,
                     'INGRESO' => $this->input->post("ingreso_madre")
                 );
+
                 if ($this->input->post("h_estudiando") == "true"){
                     $h_estudiando ='S';
                 }else{
                     $h_estudiando = 'N';
                 }
+
                 $arreglo_antecedentes_familiares = array(
                     'N_INTEGRANTES' => $this->input->post("integrantes"),
                     'N_HERMANOS' => $this->input->post("n_hermanos"),
@@ -154,11 +173,13 @@ class Registro_alumnos extends CI_Controller
                     // todo -> CAMPO OBTENIDO EN TRANSACCIÓN
                     'TB_ALUMNO_ID' => ''
                 );
+
                 $rut_jefe_hogar = $this->input->post("rut_jefe_hogar");
                 $rut_jefe_hogar = str_replace('.','',$rut_jefe_hogar);
                 $rut_jefe_hogar = str_replace('-','',$rut_jefe_hogar);
                 $rut_jefe_hogar_dv = substr($rut_jefe_hogar,-1);
                 $rut_jefe_hogar = substr($rut_jefe_hogar, 0, -1);
+
                 $arreglo_jefe_hogar = array(
                     'RUT' => $rut_jefe_hogar,
                     'DV' => $rut_jefe_hogar_dv,
@@ -166,11 +187,13 @@ class Registro_alumnos extends CI_Controller
                     // todo -> CAMPO OBTENIDO EN TRANSACCIÓN
                     'TB_ALUMNO_ID' => ''
                 );
+
                 $rut_apoderado = $this->input->post("rut_apoderado");
                 $rut_apoderado = str_replace('.','',$rut_apoderado);
                 $rut_apoderado = str_replace('-','',$rut_apoderado);
                 $rut_apoderado_dv = substr($rut_apoderado,-1);
                 $rut_apoderado = substr($rut_apoderado, 0, -1);
+
                 $arreglo_apoderado = array(
                     'RUT' => $rut_apoderado,
                     'DV' => $rut_apoderado_dv,
@@ -183,6 +206,7 @@ class Registro_alumnos extends CI_Controller
                     // todo -> CAMPO OBTENIDO EN TRANSACCIÓN
                     'TB_ALUMNO_ID' => ''
                 );
+
                 $this->load->model('registro/registro_model','registro_model');
                 $registro = $this->registro_model->transaccion_registrar_alumno($arreglo_alumno,$arreglo_matricula_alumno,$arreglo_antecedentes_alumno,$arreglo_padre,$arreglo_madre,$arreglo_antecedentes_familiares,$arreglo_jefe_hogar,$arreglo_apoderado);
                 if($registro == true){
@@ -274,7 +298,7 @@ class Registro_alumnos extends CI_Controller
     }
     function validar_datos_apoderado(){
         $this->form_validation->set_rules("rut_apoderado", "Rut Apoderado", "required|min_length[3]|max_length[20]");
-        //$this->form_validation->set_rules("nombre_apoderado", "Nombres Apoderado", "required|is_numeric|min_length[3]|max_length[200]");
+        $this->form_validation->set_rules("nombre_apoderado", "Nombres Apoderado", "required|is_numeric|min_length[3]|max_length[200]");
         $this->form_validation->set_rules("apellido_pat_apoderado", "Apellido Paterno Apoderado", "required|min_length[3]|max_length[200]");
         $this->form_validation->set_rules("apellido_mat_apoderado", "Apellido Materno Apoderado", "required|min_length[3]|max_length[200]");
         $this->form_validation->set_rules("numero_apoderado", "Telefono Apoderado", "required|min_length[3]|max_length[50]");
@@ -282,6 +306,4 @@ class Registro_alumnos extends CI_Controller
         $this->form_validation->set_rules("tipo_apoderado", "Prevision", "required|is_numeric");
         return $this->form_validation->run();
     }
-
-
 }

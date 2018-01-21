@@ -32,35 +32,35 @@
                         <div class="row">
                             <div class="form-group col-md-4">
                                 <label for="nombres">Nombres:</label>
-                                <input type="text" class="form-control" name="nombres">
+                                <input type="text" class="form-control" name="nombres" value="<?php if(isset($alumno)){ if($alumno[0]->NOMBRES != null){echo $alumno[0]->NOMBRES;} } ?>">
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="apellido_pat">Apellido Paterno:</label>
-                                <input type="text" class="form-control" name="apellido_pat">
+                                <input type="text" class="form-control" name="apellido_pat" value="<?php if(isset($alumno)){ if($alumno[0]->APELLIDO_PAT != null){echo $alumno[0]->APELLIDO_PAT;} } ?>">
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="apellido_mat">Apellido Materno:</label>
-                                <input type="text" class="form-control" name="apellido_mat">
+                                <input type="text" class="form-control" name="apellido_mat" value="<?php if(isset($alumno)){ if($alumno[0]->APELLIDO_MAT != null){echo $alumno[0]->APELLIDO_MAT;} } ?>">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-4">
                                 <label for="apellido_mat">Rut:</label>
-                                <input type="text" class="form-control" name="rut" maxlength="9">
+                                <input type="text" class="form-control" name="rut" maxlength="9" value="<?php if(isset($alumno)){ if($alumno[0]->RUT != null){echo $alumno[0]->RUT.'-'.$alumno[0]->DV;} } ?>">
                             </div>
                             <div class="form-group col-md-2">
                                 <label for="nombres">Fecha Nacimiento:</label>
-                                <input type="date" class="form-control" name="fecha_nacimiento">
+                                <input type="date" class="form-control" name="fecha_nacimiento" value="<?php if(isset($alumno)){ if($alumno[0]->FECHA_NACIMIENTO != null){echo $alumno[0]->FECHA_NACIMIENTO;} } ?>">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="nombres">Direccion:</label>
-                                <input type="text" class="form-control" name="domicilio">
+                                <input type="text" class="form-control" name="domicilio" value="<?php if(isset($alumno)){ if($alumno[0]->DOMICILIO != null){echo $alumno[0]->DOMICILIO;} } ?>">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-3">
                                 <label for="telefono">Telefono:</label>
-                                <input type="text" class="form-control" name="numero">
+                                <input type="text" class="form-control" name="numero" value="<?php if(isset($alumno)){ if($alumno[0]->NUMERO != null){echo $alumno[0]->NUMERO;} } ?>">
                             </div>
                             <div class="form-group col-md-3">
                                 <label class="col-sm-3 control-label">Curso:</label>

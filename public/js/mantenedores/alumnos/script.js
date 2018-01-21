@@ -29,7 +29,7 @@ $(document).ready(function () {
         ],
 
     });
-    $("#tabla_alumnos").on('click','> tbody > tr > td:nth-child(8) > button.btn.btn-primary.btn-xs.btn_editar', function () {
+    $("#tabla_alumnos").on('click','> tbody > tr > td:nth-child(8) > button.btn.btn-success.btn-xs.btn_editar', function () {
         //Limpieza alerta
         $("#modal_alerta_editar").html('');
         $("#modal_alerta_editar").removeClass('alert alert-danger');
