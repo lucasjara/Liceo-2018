@@ -18,7 +18,6 @@ class Alumnos extends CI_Controller
     function index(){
         $this->load->model('mantenedores/alumnos_model','alumnos_model');
         $this->layout->view('vista');
-        //$this->load->view('alumnos/vista',$data);
     }
     function obtener_datos(){
         $this->load->helper('array_utf8');
@@ -73,7 +72,14 @@ class Alumnos extends CI_Controller
                 $id = $this->input->post('id');
                 $this->load->model('mantenedores/alumnos_model','alumnos_model');
                 $this->alumnos_model->eliminar_alumno($id);
+                $this->alumnos_model->eliminar_antecedentes($id);
+                $this->alumnos_model->eliminar_antecedentes_familiares($id);
+                $this->alumnos_model->eliminar_apoderados($id);
+                $this->alumnos_model->eliminar_familiares($id);
+                $this->alumnos_model->eliminar_jefe_hogar($id);
+                $this->alumnos_model->eliminar_matricula($id);
                 $mensaje->respuesta = "S";
+                $mensaje->respuesta = "Registro Eliminado Correctamente";
             }else{
                 $mensaje->respuesta = "N";
                 $mensaje->data = validation_errors();

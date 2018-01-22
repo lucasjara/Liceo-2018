@@ -61,7 +61,7 @@
                         <div class="row">
                             <div class="form-group col-md-4">
                                 <label for="apellido_mat"><span class="text-danger">*</span>Rut:</label>
-                                <input type="text" class="form-control" name="rut" maxlength="9"
+                                <input type="text" class="form-control" name="rut" maxlength="9" placeholder="SIN PUNTOS NI GUIONES"
                                        value="<?php if (isset($alumno)) {
                                            if ($alumno[0]->RUT != null) {
                                                echo $alumno[0]->RUT . '-' . $alumno[0]->DV;
@@ -421,7 +421,7 @@
                                     <select class="form-control" id="nivel_educacional" name="nivel_educacional_padre">
                                         <option value="">Seleccione...</option>
                                         <?php
-                                        if (isset($padre[0]->TB_NIVEL_EDUCACION_ID)) {
+                                        if (isset($padre[0]->TB_NIVEL_EDUCACIONAL_ID)) {
                                             $numero = $padre[0]->TB_NIVEL_EDUCACIONAL_ID;
                                         }
                                         foreach ($nivel_educacional as $row) {
@@ -533,7 +533,7 @@
                                     <select class="form-control" id="nivel_educacional" name="nivel_educacional_madre">
                                         <option value="">Seleccione...</option>
                                         <?php
-                                        if (isset($madre[0]->TB_NIVEL_EDUCACION_ID)) {
+                                        if (isset($madre[0]->TB_NIVEL_EDUCACIONAL_ID)) {
                                             $numero = $madre[0]->TB_NIVEL_EDUCACIONAL_ID;
                                         }
                                         foreach ($nivel_educacional as $row) {

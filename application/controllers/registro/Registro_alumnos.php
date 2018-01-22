@@ -132,7 +132,7 @@ class Registro_alumnos extends CI_Controller
                     'DOMICILIO' => $this->input->post("domicilio_padre"),
                     // todo -> CAMPO OBTENIDO EN TRANSACCIÓN
                     'TB_ALUMNO_ID' => '',
-                    'TB_NIVEL_EDUCACION_ID' => $this->input->post("nivel_educacional_padre"),
+                    'TB_NIVEL_EDUCACIONAL_ID' => $this->input->post("nivel_educacional_padre"),
                     'TB_VINCULO_ALUMNO_ID' => 2,
                     'INGRESO' => $this->input->post("ingreso_padre")
                 );
@@ -155,7 +155,7 @@ class Registro_alumnos extends CI_Controller
                     'DOMICILIO' => $this->input->post("domicilio_madre"),
                     // todo -> CAMPO OBTENIDO EN TRANSACCIÓN
                     'TB_ALUMNO_ID' => '',
-                    'TB_NIVEL_EDUCACION_ID' => $this->input->post("nivel_educacional_madre"),
+                    'TB_NIVEL_EDUCACIONAL_ID' => $this->input->post("nivel_educacional_madre"),
                     'TB_VINCULO_ALUMNO_ID' => 1,
                     'INGRESO' => $this->input->post("ingreso_madre")
                 );
@@ -234,7 +234,6 @@ class Registro_alumnos extends CI_Controller
     }
     function validar_datos_alumno()
     {
-
         $this->form_validation->set_rules("nombres", "Nombres Alumno", "required|min_length[3]");
         $this->form_validation->set_rules("apellido_pat", "Apellido Paterno Alumno", "required|min_length[3]|max_length[200]");
         $this->form_validation->set_rules("apellido_mat", "Apellido Materno Alumno", "required|min_length[3]|max_length[200]");
@@ -263,25 +262,34 @@ class Registro_alumnos extends CI_Controller
         return $this->form_validation->run();
     }
     function validar_datos_padre(){
-        $this->form_validation->set_rules("nombres_padre", "Nombres Padre", "required|min_length[3]|max_length[200]");
-        $this->form_validation->set_rules("apellido_pat_padre", "Apellido Paterno Padre", "required|min_length[3]|max_length[200]");
-        $this->form_validation->set_rules("apellido_mat_padre", "Apellido Materno Padre", "required|min_length[3]|max_length[200]");
-        $this->form_validation->set_rules("nivel_educacional_padre", "Nivel Educacional Padre", "required|is_numeric");
-        $this->form_validation->set_rules("rut_padre", "Rut Padre", "required|min_length[3]|max_length[20]");
-        $this->form_validation->set_rules("fecha_nacimiento_padre", "Fecha Nacimiento Padre", "required|exact_length[10]");
-        $this->form_validation->set_rules("domicilio_padre", "Direccion Padre", "required|min_length[3]|max_length[200]");
-        $this->form_validation->set_rules("ingreso_padre", "Ingreso Padre", "required|is_numeric|max_length[20]");
+        if ($this->input->post('nombres_padre') != ''){
+            $this->form_validation->set_rules("nombres_padre", "Nombres Padre", "required|min_length[3]|max_length[200]");
+            $this->form_validation->set_rules("apellido_pat_padre", "Apellido Paterno Padre", "required|min_length[3]|max_length[200]");
+            $this->form_validation->set_rules("apellido_mat_padre", "Apellido Materno Padre", "required|min_length[3]|max_length[200]");
+            $this->form_validation->set_rules("nivel_educacional_padre", "Nivel Educacional Padre", "required|is_numeric");
+            $this->form_validation->set_rules("rut_padre", "Rut Padre", "required|min_length[3]|max_length[20]");
+            $this->form_validation->set_rules("fecha_nacimiento_padre", "Fecha Nacimiento Padre", "required|exact_length[10]");
+            $this->form_validation->set_rules("domicilio_padre", "Direccion Padre", "required|min_length[3]|max_length[200]");
+            $this->form_validation->set_rules("ingreso_padre", "Ingreso Padre", "required|is_numeric|max_length[20]");
+        }else{
+            return true;
+        }
+
         return $this->form_validation->run();
     }
     function validar_datos_madre(){
-        $this->form_validation->set_rules("nombres_madre", "Nombres Madre", "required|min_length[3]|max_length[200]");
-        $this->form_validation->set_rules("apellido_pat_madre", "Apellido Paterno Madre", "required|min_length[3]|max_length[200]");
-        $this->form_validation->set_rules("apellido_mat_madre", "Apellido Materno Madre", "required|min_length[3]|max_length[200]");
-        $this->form_validation->set_rules("nivel_educacional_madre", "Nivel Educacional Madre", "required|is_numeric");
-        $this->form_validation->set_rules("rut_madre", "Rut Madre", "required|min_length[3]|max_length[20]");
-        $this->form_validation->set_rules("fecha_nacimiento_madre", "Fecha Nacimiento Madre", "required|exact_length[10]");
-        $this->form_validation->set_rules("domicilio_madre", "Direccion Madre", "required|min_length[3]|max_length[200]");
-        $this->form_validation->set_rules("ingreso_madre", "Ingreso Madre", "required|is_numeric|max_length[20]");
+        if ($this->input->post('nombres_madre') != '') {
+            $this->form_validation->set_rules("nombres_madre", "Nombres Madre", "required|min_length[3]|max_length[200]");
+            $this->form_validation->set_rules("apellido_pat_madre", "Apellido Paterno Madre", "required|min_length[3]|max_length[200]");
+            $this->form_validation->set_rules("apellido_mat_madre", "Apellido Materno Madre", "required|min_length[3]|max_length[200]");
+            $this->form_validation->set_rules("nivel_educacional_madre", "Nivel Educacional Madre", "required|is_numeric");
+            $this->form_validation->set_rules("rut_madre", "Rut Madre", "required|min_length[3]|max_length[20]");
+            $this->form_validation->set_rules("fecha_nacimiento_madre", "Fecha Nacimiento Madre", "required|exact_length[10]");
+            $this->form_validation->set_rules("domicilio_madre", "Direccion Madre", "required|min_length[3]|max_length[200]");
+            $this->form_validation->set_rules("ingreso_madre", "Ingreso Madre", "required|is_numeric|max_length[20]");
+        }else{
+            return true;
+        }
         return $this->form_validation->run();
     }
     function validar_datos_familia(){
@@ -295,16 +303,20 @@ class Registro_alumnos extends CI_Controller
         return $this->form_validation->run();
     }
     function validar_datos_jefe_hogar(){
-        $this->form_validation->set_rules("jefe_hogar", "Jefe Hogar", "required|is_numeric");
-        $this->form_validation->set_rules("rut_jefe_hogar", "Rut Jefe Hogar", "required|min_length[3]|max_length[20]");
-        $this->form_validation->set_rules("religion", "Religion", "required|is_numeric");
-        $this->form_validation->set_rules("prevision", "Prevision", "required|is_numeric");
-        $this->form_validation->set_rules("salud", "Salud", "required|is_numeric");
+        if ($this->input->post('rut_jefe_hogar')){
+            $this->form_validation->set_rules("jefe_hogar", "Jefe Hogar", "required|is_numeric");
+            $this->form_validation->set_rules("rut_jefe_hogar", "Rut Jefe Hogar", "required|min_length[3]|max_length[20]");
+            $this->form_validation->set_rules("religion", "Religion", "required|is_numeric");
+            $this->form_validation->set_rules("prevision", "Prevision", "required|is_numeric");
+            $this->form_validation->set_rules("salud", "Salud", "required|is_numeric");
+        }else{
+            return true;
+        }
         return $this->form_validation->run();
     }
     function validar_datos_apoderado(){
         $this->form_validation->set_rules("rut_apoderado", "Rut Apoderado", "required|min_length[3]|max_length[20]");
-        $this->form_validation->set_rules("nombre_apoderado", "Nombres Apoderado", "required|is_numeric|min_length[3]|max_length[200]");
+        $this->form_validation->set_rules("nombre_apoderado", "Nombres Apoderado", "required|min_length[3]|max_length[200]");
         $this->form_validation->set_rules("apellido_pat_apoderado", "Apellido Paterno Apoderado", "required|min_length[3]|max_length[200]");
         $this->form_validation->set_rules("apellido_mat_apoderado", "Apellido Materno Apoderado", "required|min_length[3]|max_length[200]");
         $this->form_validation->set_rules("numero_apoderado", "Telefono Apoderado", "required|min_length[3]|max_length[50]");
