@@ -15,6 +15,7 @@ class Registro_alumnos extends CI_Controller
         $this->load->library('form_validation');
     }
     function index(){
+        $datos["boton"] = 1;
         $this->load->model('registro/registro_model','registro_model');
         // todo --> Carga de Datos Alumno Ya registrado
         $id = $this->input->post('id');
@@ -27,6 +28,7 @@ class Registro_alumnos extends CI_Controller
             $datos["familia"] = $this->registro_model->obtener_datos_antecedentes_familiares($id);
             $datos["jefe_hogar"] = $this->registro_model->obtener_datos_jefe_hogar($id);
             $datos["apoderado"] = $this->registro_model->obtener_datos_apoderado($id);
+            $datos["boton"] = 2;
         }
         // Carga de Select
         $datos["comuna"] =$this->registro_model->obtener_comunas();
@@ -94,7 +96,7 @@ class Registro_alumnos extends CI_Controller
                     'VILLA' => strtoupper($this->input->post('poblacion')),
                     'REPITE_CURSO' => $repite_curso,
                     'CUAL' => strtoupper($cual),
-                    'OTROS' => strtoupper($this->input->post('establecimiento')),
+                    'OTROS' => strtoupper($this->input->post('otros')),
                     'CERTIFICADO_UNO' => $certificado_uno,
                     'CERTIFICADO_DOS' => $certificado_dos,
                     'CERTIFICADO_TRES' => $certificado_tres,
@@ -106,6 +108,7 @@ class Registro_alumnos extends CI_Controller
                     'TB_RELIGION_ID' => $this->input->post('religion'),
                     'TB_PREVISION_ID' => $this->input->post('prevision'),
                     'TB_SALUD_ID' => $this->input->post('salud'),
+                    'TB_COMUNA_ID' => $this->input->post('comuna'),
                     // todo -> CAMPO OBTENIDO EN TRANSACCIÓN
                     'TB_ALUMNO_ID' => ''
                 );
@@ -129,6 +132,7 @@ class Registro_alumnos extends CI_Controller
                     'DOMICILIO' => $this->input->post("domicilio_padre"),
                     // todo -> CAMPO OBTENIDO EN TRANSACCIÓN
                     'TB_ALUMNO_ID' => '',
+                    'TB_NIVEL_EDUCACION_ID' => $this->input->post("nivel_educacional_padre"),
                     'TB_VINCULO_ALUMNO_ID' => 2,
                     'INGRESO' => $this->input->post("ingreso_padre")
                 );
@@ -151,6 +155,7 @@ class Registro_alumnos extends CI_Controller
                     'DOMICILIO' => $this->input->post("domicilio_madre"),
                     // todo -> CAMPO OBTENIDO EN TRANSACCIÓN
                     'TB_ALUMNO_ID' => '',
+                    'TB_NIVEL_EDUCACION_ID' => $this->input->post("nivel_educacional_madre"),
                     'TB_VINCULO_ALUMNO_ID' => 1,
                     'INGRESO' => $this->input->post("ingreso_madre")
                 );
@@ -197,10 +202,10 @@ class Registro_alumnos extends CI_Controller
                 $arreglo_apoderado = array(
                     'RUT' => $rut_apoderado,
                     'DV' => $rut_apoderado_dv,
-                    'NOMBRES' => $this->input->post("nombre_apoderado"),
-                    'APELLIDO_PAT' => $this->input->post("apellido_pat_apoderado"),
-                    'APELLIDO_MAT' => $this->input->post("apellido_mat_apoderado"),
-                    'NUMERO' => $this->input->post("numero_apoderado"),
+                    'NOMBRES' =>  strtoupper($this->input->post("nombre_apoderado")),
+                    'APELLIDO_PAT' =>  strtoupper($this->input->post("apellido_pat_apoderado")),
+                    'APELLIDO_MAT' =>  strtoupper($this->input->post("apellido_mat_apoderado")),
+                    'NUMERO' =>  strtoupper($this->input->post("numero_apoderado")),
                     'TB_VINCULO_ALUMNO_ID' => $this->input->post("vinculo_alumno"),
                     'TB_TIPO_APODERADO_ID' => $this->input->post("tipo_apoderado"),
                     // todo -> CAMPO OBTENIDO EN TRANSACCIÓN
@@ -229,13 +234,14 @@ class Registro_alumnos extends CI_Controller
     }
     function validar_datos_alumno()
     {
+
         $this->form_validation->set_rules("nombres", "Nombres Alumno", "required|min_length[3]");
         $this->form_validation->set_rules("apellido_pat", "Apellido Paterno Alumno", "required|min_length[3]|max_length[200]");
         $this->form_validation->set_rules("apellido_mat", "Apellido Materno Alumno", "required|min_length[3]|max_length[200]");
         $this->form_validation->set_rules("rut", "Rut Alumno", "required|min_length[11]|max_length[12]");
         $this->form_validation->set_rules("fecha_nacimiento", "Fecha Nacimiento Alumno", "required|exact_length[10]");
         $this->form_validation->set_rules("domicilio", "Direccion Alumno", "required|min_length[3]|max_length[200]");
-        $this->form_validation->set_rules("numero", "Telefono Alumno", "required|min_length[3]|max_length[200]");
+        //$this->form_validation->set_rules("numero", "Telefono Alumno", "required|min_length[3]|max_length[200]");
         $this->form_validation->set_rules("curso", "Curso Alumno", "required|is_numeric");
         $this->form_validation->set_rules("fecha_matricula", "Fecha Matricula Alumno", "required|exact_length[10]");
         $this->form_validation->set_rules("poblacion", "Poblacion Alumno", "required|min_length[3]|max_length[200]");
@@ -252,7 +258,7 @@ class Registro_alumnos extends CI_Controller
         }
         $this->form_validation->set_rules("especialidad", "Especialidad Alumno", "required|is_numeric");
         $this->form_validation->set_rules("sector_vive", "Sector Vive Alumno", "required|is_numeric");
-        $this->form_validation->set_rules("ascendencia", "Ascendencia Alumno", "required|is_numeric");
+        //$this->form_validation->set_rules("ascendencia", "Ascendencia Alumno", "required|is_numeric");
         $this->form_validation->set_rules("viaja", "Viaja Alumno", "required|is_numeric");
         return $this->form_validation->run();
     }
