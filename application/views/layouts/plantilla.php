@@ -39,7 +39,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="<?php echo base_url('/registro/registro_alumnos')?>">Registrar Alumno</a></li>
                 <li><a href="<?php echo base_url('/mantenedores/alumnos')?>">Listado Alumno</a></li>
-                <li><a href="<?php echo base_url('/mantenedores/alumnos')?>">Mini Manual de Uso</a></li>
+                <li><a href="<?php echo base_url('/manuales/informativo')?>">Mini Manual de Uso</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
