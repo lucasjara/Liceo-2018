@@ -51,7 +51,76 @@ class registro_model extends CI_Model
         }
         return $mensaje;
     }
-
+    function transaccion_editar_alumno($id_alumno,$alumno, $matricula_alumno, $antecentes_alumno, $familiares_padre, $familiares_madre, $antecentes_familiares, $jefe_hogar, $apoderado){
+        $mensaje = new stdClass();
+        $this->db->trans_begin();
+        // todo --> Tablas a Actualizar Informacion
+        $this->actualizar_datos_alumno($id_alumno,$alumno);
+        $this->actualizar_datos_matricula($id_alumno,$matricula_alumno);
+        $this->actualizar_datos_antecedentes($id_alumno,$antecentes_alumno);
+        $this->actualizar_datos_familiares_padre($id_alumno,$familiares_padre);
+        $this->actualizar_datos_familiares_madre($id_alumno,$familiares_madre);
+        $this->actualizar_datos_antecedentes_familiares($id_alumno,$antecentes_familiares);
+        $this->actualizar_datos_jefe_hogar($id_alumno,$jefe_hogar);
+        $this->actualizar_datos_apoderado($id_alumno,$apoderado);
+        // todo --> ----------------------------------------
+        if ($this->db->trans_status() === FALSE) {
+            $this->db->trans_rollback();
+            $mensaje->respuesta = "N";
+            $mensaje->data = " No se pudo procesar la transacci�n";
+        } else {
+            $this->db->trans_commit();
+        }
+        return $mensaje;
+    }
+    function actualizar_datos_alumno($id,$alumno){
+        //todo |Formato Base de datos --> Rut|
+        $alumno["rut"] = str_replace('.', '', $alumno["rut"]);
+        $alumno["rut"] = str_replace('-', '', $alumno["rut"]);
+        $alumno["dv"] = substr($alumno["rut"], -1);
+        $alumno["rut"] = substr($alumno["rut"], 0, -1);
+        $this->db->set('RUT', $alumno["rut"]);
+        $this->db->set('DV', $alumno["dv"]);
+        $this->db->set('NOMBRES', strtoupper($alumno["nombres"]));
+        $this->db->set('APELLIDO_PAT', strtoupper($alumno["apellido_pat"]));
+        $this->db->set('APELLIDO_MAT', strtoupper($alumno["apellido_mat"]));
+        $this->db->set('FECHA_NACIMIENTO', $alumno["fecha_nacimiento"]);
+        $this->db->set('DOMICILIO', strtoupper($alumno["domicilio"]));
+        $this->db->set('NUMERO', strtoupper($alumno["numero"]));
+        $this->db->set('VISIBLE', 'S');
+        $this->db->where('ID', $id);
+        return $this->db->update('tb_alumnos',$alumno);
+    }
+    function actualizar_datos_matricula($id,$matricula_alumno){
+        $this->db->where('TB_ALUMNO_ID', $id);
+        return $this->db->update('tb_matricula',$matricula_alumno);
+    }
+    function actualizar_datos_antecedentes($id,$antecedentes){
+        $this->db->where('TB_ALUMNO_ID', $id);
+        return $this->db->update('tb_antecedentes',$antecedentes);
+    }
+    function actualizar_datos_familiares_padre($id,$padre){
+        $this->db->where('TB_ALUMNO_ID', $id);
+        $this->db->where('TB_VINCULO_ALUMNO_ID', 2);
+        return $this->db->update('tb_familiares',$padre);
+    }
+    function actualizar_datos_familiares_madre($id,$familiares){
+        $this->db->where('TB_ALUMNO_ID', $id);
+        $this->db->where('TB_VINCULO_ALUMNO_ID', 1);
+        return $this->db->update('tb_familiares',$familiares);
+    }
+    function actualizar_datos_antecedentes_familiares($id,$antecedentes_familiares){
+        $this->db->where('TB_ALUMNO_ID', $id);
+        return $this->db->update('tb_antecedentes_familiares',$antecedentes_familiares);
+    }
+    function actualizar_datos_jefe_hogar($id,$jefe_hogar){
+        $this->db->where('TB_ALUMNO_ID', $id);
+        return $this->db->update('tb_jefe_hogar',$jefe_hogar);
+    }
+    function actualizar_datos_apoderado($id,$apoderado){
+        $this->db->where('TB_ALUMNO_ID', $id);
+        return $this->db->update('tb_apoderados',$apoderado);
+    }
     function ingresar_alumno($alumno)
     {
         //todo |Formato Base de datos --> Rut|
@@ -130,7 +199,7 @@ class registro_model extends CI_Model
 
     function obtener_establecimiento()
     {
-        $this->db->select("*")->from('tb_establecimiento');
+        $this->db->select("*")->from('tb_establecimiento')->order_by("DESCRIPCION");
         $query = $this->db->get();
         return $query->result();
     }
@@ -264,6 +333,13 @@ class registro_model extends CI_Model
     function obtener_datos_matricula($id)
     {
         $this->db->select("*")->from('tb_matricula')->where('TB_ALUMNO_ID', $id);
+        $query = $this->db->get();
+        return $query->result();
+    }
+    function buscar_tipo_establecimiento($id_establecimiento){
+        $this->db->select("tipo.ID, tipo.DESCRIPCION")->from('tb_establecimiento establecimiento')
+            ->join("tb_tipo_establecimiento tipo","tipo.ID=establecimiento.TB_TIPO_ESTABLECIMIENTO_ID","INNER")
+            ->where('establecimiento.ID', $id_establecimiento);
         $query = $this->db->get();
         return $query->result();
     }

@@ -79,7 +79,7 @@ class Alumnos extends CI_Controller
                 $this->alumnos_model->eliminar_jefe_hogar($id);
                 $this->alumnos_model->eliminar_matricula($id);
                 $mensaje->respuesta = "S";
-                $mensaje->respuesta = "Registro Eliminado Correctamente";
+                $mensaje->data = "Registro Eliminado Correctamente";
             }else{
                 $mensaje->respuesta = "N";
                 $mensaje->data = validation_errors();

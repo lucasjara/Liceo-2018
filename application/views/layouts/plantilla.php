@@ -15,6 +15,9 @@
     <title>Liceo</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="<?php echo base_url('/public/bootstrap/css/bootstrap.min.css')?>">
+    <link rel="stylesheet" href="<?php echo base_url('/public/select2/dist/css/select2.min.css')?>">
+    <link rel="stylesheet" href="<?php echo base_url('/public/select_bootstrap/dist/select2-bootstrap.css')?>">
+    <link rel="stylesheet" href="<?php echo base_url('/public/select_bootstrap/dist/select2-bootstrap.min.css')?>">
     <!-- Carga Inicial por carga de plantilla-->
     <script src="<?php echo base_url('/public/js/jquery.js')?>"></script>
 </head>
@@ -36,6 +39,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="<?php echo base_url('/registro/registro_alumnos')?>">Registrar Alumno</a></li>
                 <li><a href="<?php echo base_url('/mantenedores/alumnos')?>">Listado Alumno</a></li>
+                <li><a href="<?php echo base_url('/mantenedores/alumnos')?>">Mini Manual de Uso</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -58,6 +62,9 @@
         border-width: 1px 0;
         margin: 18px 0;
     }
+    .select2 {
+        width: 100%!important; /* overrides computed width, 100px in your demo */
+    }
 </style>
 <div class="modal fade" id="modal_generico" tabindex="-1"
 role="dialog" aria-hidden="true">
@@ -79,5 +86,6 @@ role="dialog" aria-hidden="true">
 <script src="<?php echo base_url('/public/bootstrap/js/bootstrap.min.js')?>"></script>
 <script src="<?php echo base_url('/public/js/datatables.js')?>"></script>
 <script src="<?php echo base_url('/public/js/integracion_datatables.js')?>"></script>
+<script src="<?php echo base_url('/public/select2/dist/js/select2.min.js')?>"></script>
 </html>
 

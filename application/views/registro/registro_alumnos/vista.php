@@ -5,6 +5,11 @@
  * Date: 17-01-2018
  * Time: 10:15
  */
+
+// todo -->  Formato Rut
+function rut( $rut ) {
+    return number_format( substr ( $rut, 0 , -1 ) , 0, "", ".") . '-' . substr ( $rut, strlen($rut) -1 , 1 );
+}
 ?>
 
 <br>
@@ -63,8 +68,9 @@
                                 <label for="apellido_mat"><span class="text-danger">*</span>Rut:</label>
                                 <input type="text" class="form-control" name="rut" maxlength="9" placeholder="SIN PUNTOS NI GUIONES"
                                        value="<?php if (isset($alumno)) {
+                                           $rut = rut($alumno[0]->RUT.$alumno[0]->DV);
                                            if ($alumno[0]->RUT != null) {
-                                               echo $alumno[0]->RUT . '-' . $alumno[0]->DV;
+                                               echo $rut;
                                            }
                                        } ?>">
                             </div>
@@ -182,7 +188,6 @@
                                 <div class="col-sm-12" id="sandbox-container">
                                     <select class="form-control" id="tipo_establecimiento" disabled
                                             name="tipo_establecimiento">
-                                        <option value="">Seleccione...</option>
                                     </select>
                                 </div>
                             </div>
@@ -436,13 +441,15 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="form-group col-md-2">
                                 <label for="apellido_mat">Rut:</label>
-                                <input type="text" class="form-control" name="rut_padre"
-                                       value="<?php if (isset($padre[0]->RUT)) {
+                                <input type="text" class="form-control" name="rut_padre" placeholder="SIN PUNTOS NI GUIONES"
+                                       value="<?php if (isset($padre[0]->RUT) && $padre[0]->RUT != 0) {
+                                           $rut_padre = rut($padre[0]->RUT.$padre[0]->DV);
                                            if ($padre[0]->RUT != null) {
-                                               echo $padre[0]->RUT . '-' . $padre[0]->DV;
+                                               echo $rut_padre;
                                            }
                                        } ?>">
                             </div>
@@ -551,10 +558,11 @@
                         <div class="row">
                             <div class="form-group col-md-2">
                                 <label for="apellido_mat">Rut:</label>
-                                <input type="text" class="form-control" name="rut_madre"
-                                       value="<?php if (isset($madre[0]->RUT)) {
+                                <input type="text" class="form-control" name="rut_madre" placeholder="SIN PUNTOS NI GUIONES"
+                                       value="<?php if (isset($madre[0]->RUT) &&  $madre[0]->RUT != 0) {
+                                           $rut_madre = rut($madre[0]->RUT.$madre[0]->DV);
                                            if ($madre[0]->RUT != null) {
-                                               echo $madre[0]->RUT . '-' . $madre[0]->DV;
+                                               echo $rut_madre;
                                            }
                                        } ?>">
                             </div>
@@ -723,7 +731,7 @@
                                         <option value="">Seleccione...</option>
                                         <?php
                                         if (isset($jefe_hogar[0]->TB_VINCULO_ALUMNO_ID)) {
-                                            $numero = $jefe_hogar[0]->TB_NIVINCULO_ALUMNO_ID;
+                                            $numero = $jefe_hogar[0]->TB_VINCULO_ALUMNO_ID;
                                         }
                                         foreach ($vinculo_alumno as $row) {
                                             if ($row->ID === $numero) {
@@ -738,10 +746,11 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="apellido_mat">Rut:</label>
-                                <input type="text" class="form-control" name="rut_jefe_hogar"
-                                       value="<?php if (isset($jefe_hogar[0]->RUT)) {
+                                <input type="text" class="form-control" name="rut_jefe_hogar" placeholder="SIN PUNTOS NI GUIONES"
+                                       value="<?php if (isset($jefe_hogar[0]->RUT) && $jefe_hogar[0]->RUT != 0) {
+                                           $rut_jefe_hogar = rut($jefe_hogar[0]->RUT.$jefe_hogar[0]->DV);
                                            if ($jefe_hogar[0]->RUT != null) {
-                                               echo $jefe_hogar[0]->RUT . '-' . $jefe_hogar[0]->DV;
+                                               echo $rut_jefe_hogar;
                                            }
                                        } ?>">
                             </div>
@@ -751,8 +760,15 @@
                                     <select class="form-control" id="religion" name="religion">
                                         <option value="">Seleccione...</option>
                                         <?php
+                                        if (isset($antecedente[0]->TB_RELIGION_ID)) {
+                                            $numero = $antecedente[0]->TB_RELIGION_ID;
+                                        }
                                         foreach ($religion as $row) {
-                                            echo '<option value="' . $row->ID . '">' . $row->DESCRIPCION . '</option>';
+                                            if ($row->ID === $numero) {
+                                                echo '<option value="' . $row->ID . '" selected>' . $row->DESCRIPCION . '</option>';
+                                            } else {
+                                                echo '<option value="' . $row->ID . '">' . $row->DESCRIPCION . '</option>';
+                                            }
                                         }
                                         ?>
                                     </select>
@@ -766,8 +782,15 @@
                                     <select class="form-control" id="prevision" name="prevision">
                                         <option value="">Seleccione...</option>
                                         <?php
+                                        if (isset($antecedente[0]->TB_PREVISION_ID)) {
+                                            $numero = $antecedente[0]->TB_PREVISION_ID;
+                                        }
                                         foreach ($prevision as $row) {
-                                            echo '<option value="' . $row->ID . '">' . $row->DESCRIPCION . '</option>';
+                                            if ($row->ID === $numero) {
+                                                echo '<option value="' . $row->ID . '" selected>' . $row->DESCRIPCION . '</option>';
+                                            } else {
+                                                echo '<option value="' . $row->ID . '">' . $row->DESCRIPCION . '</option>';
+                                            }
                                         }
                                         ?>
                                     </select>
@@ -779,8 +802,15 @@
                                     <select class="form-control" id="salud" name="salud">
                                         <option value="">Seleccione...</option>
                                         <?php
+                                        if (isset($antecedente[0]->TB_SALUD_ID)) {
+                                            $numero = $antecedente[0]->TB_SALUD_ID;
+                                        }
                                         foreach ($salud as $row) {
-                                            echo '<option value="' . $row->ID . '">' . $row->DESCRIPCION . '</option>';
+                                            if ($row->ID === $numero) {
+                                                echo '<option value="' . $row->ID . '" selected>' . $row->DESCRIPCION . '</option>';
+                                            } else {
+                                                echo '<option value="' . $row->ID . '">' . $row->DESCRIPCION . '</option>';
+                                            }
                                         }
                                         ?>
                                     </select>
@@ -800,10 +830,11 @@
                         <div class="row">
                             <div class="form-group col-md-3">
                                 <label for="apellido_mat">Rut:</label>
-                                <input type="text" class="form-control" name="rut_apoderado"
-                                       value="<?php if (isset($apoderado[0]->RUT)) {
+                                <input type="text" class="form-control" name="rut_apoderado" placeholder="SIN PUNTOS NI GUIONES"
+                                       value="<?php if (isset($apoderado[0]->RUT) && $apoderado[0]->RUT != 0) {
+                                           $rut_apoderado = rut($apoderado[0]->RUT.$apoderado[0]->DV);
                                            if ($apoderado[0]->RUT != null) {
-                                               echo $apoderado[0]->RUT . '-' . $apoderado[0]->DV;
+                                               echo $rut_apoderado;
                                            }
                                        } ?>">
                             </div>
@@ -852,7 +883,7 @@
                                         <option value="">Seleccione...</option>
                                         <?php
                                         if (isset($apoderado[0]->TB_VINCULO_ALUMNO_ID)) {
-                                            $numero = $apoderado[0]->TB_NIVINCULO_ALUMNO_ID;
+                                            $numero = $apoderado[0]->TB_VINCULO_ALUMNO_ID;
                                         }
                                         foreach ($vinculo_alumno as $row) {
                                             if ($row->ID === $numero) {
@@ -897,7 +928,7 @@
                             <div class="clearfix"></div>
                         <?php } else { ?>
                             <div class="form-group col-md-4 col-md-offset-1">
-                                <button type="button" class="btn btn-primary" id="boton_editar"><span
+                                <button type="button" class="btn btn-primary" id="boton_editar" data-id="<?php echo $id;?>"><span
                                             class="glyphicon glyphicon-pencil"></span> Editar Datos Alumno
                                 </button>
                             </div>

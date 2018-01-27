@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     var tabla =$('#tabla_alumnos').DataTable({
         "language": {
             "url": "/codeigniter/public/Spanish.json"
@@ -93,6 +94,7 @@ $(document).ready(function () {
             })
         }
     });
+
     function formateaRut(rut) {
         var actual = rut.replace(/^0+/, "");
         if (actual != '' && actual.length > 1) {
@@ -171,4 +173,5 @@ $(document).ready(function () {
         });
         return variable;
     }
+
 });
